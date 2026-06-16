@@ -1,0 +1,35 @@
+{
+  "name": "directus-extension-schema-sync",
+  "description": "Export and import Directus schema snapshots split by collection",
+  "version": "1.0.0",
+  "icon": "sync",
+  "keywords": ["directus", "directus-extension", "directus-extension-endpoint"],
+  "license": "MIT",
+  "type": "module",
+  "files": ["dist", "README.md"],
+  "publishConfig": { "access": "public" },
+  "directus:extension": {
+    "type": "endpoint",
+    "path": "dist/index.js",
+    "source": "src/endpoint/index.ts",
+    "host": "^11.0.0"
+  },
+  "bin": {
+    "schema-sync": "./dist/cli.js"
+  },
+  "scripts": {
+    "build:extension": "directus-extension build",
+    "build:cli": "esbuild src/cli/index.ts --bundle --platform=node --outfile=dist/cli.js --format=esm --banner:js='#!/usr/bin/env node'",
+    "build": "pnpm build:extension && pnpm build:cli",
+    "dev": "directus-extension build -w --no-minify",
+    "test": "vitest run",
+    "prepublishOnly": "pnpm build && pnpm test"
+  },
+  "devDependencies": {
+    "@directus/extensions-sdk": "12.1.0",
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
