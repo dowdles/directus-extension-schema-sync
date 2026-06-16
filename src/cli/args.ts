@@ -19,7 +19,7 @@ export function hasFlag(args: string[], flag: string): boolean {
 
 export function parseCliConfig(args: string[]): CliConfig {
   return {
-    url: getFlag(args, '--url') ?? process.env.DIRECTUS_URL ?? 'http://localhost:8055',
+    url: (getFlag(args, '--url') ?? process.env.DIRECTUS_URL ?? 'http://localhost:8055').replace(/\/$/, ''),
     token: getFlag(args, '--token') ?? process.env.DIRECTUS_ACCESS_TOKEN,
     outputDir: getFlag(args, '--output') ?? process.env.SCHEMA_SYNC_OUTPUT_DIR ?? './snapshots/split',
     ignoreSystemCollections:
