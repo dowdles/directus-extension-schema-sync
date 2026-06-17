@@ -5,6 +5,7 @@
   "icon": "sync",
   "keywords": ["directus", "directus-extension", "directus-extension-endpoint"],
   "license": "MIT",
+  "packageManager": "pnpm@10.33.0",
   "type": "module",
   "files": ["dist", "README.md"],
   "publishConfig": { "access": "public" },
