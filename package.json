@@ -25,6 +25,9 @@
     "test": "vitest run",
     "prepublishOnly": "pnpm build && pnpm test"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "vue-demi"]
+  },
   "devDependencies": {
     "@directus/extensions-sdk": "12.1.0",
     "@types/node": "^24.0.0",
