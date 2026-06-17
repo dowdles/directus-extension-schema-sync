@@ -1,5 +1,5 @@
 {
-  "name": "directus-extension-schema-sync",
+  "name": "directus-extension-schema-split",
   "description": "Export and import Directus schema snapshots split by collection",
   "version": "1.0.0",
   "icon": "sync",

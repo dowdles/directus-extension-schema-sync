@@ -1,11 +1,11 @@
-# directus-extension-schema-sync
+# directus-extension-schema-split
 
 Export and import Directus schema snapshots split by collection — one JSON file per collection instead of a single monolithic snapshot. Easier to review in version control.
 
 ## Installation
 
 ```sh
-pnpm add directus-extension-schema-sync
+pnpm add directus-extension-schema-split
 ```
 
 Restart Directus after installation.
