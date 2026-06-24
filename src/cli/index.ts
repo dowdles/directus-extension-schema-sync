@@ -47,7 +47,7 @@ function toSchemaConfig(config: CliConfig): SchemaConfig {
 async function directExport(config: CliConfig): Promise<void> {
   const tmpFile = join(tmpdir(), `schema-sync-${process.pid}.json`)
   try {
-    await spawnCommand('npx', ['directus', 'schema', 'snapshot', tmpFile])
+    await spawnCommand('npx', ['directus', 'schema', 'snapshot', '--format', 'json', tmpFile])
     const raw = await readFile(tmpFile, 'utf-8')
     const snapshot: DirectusSnapshot = JSON.parse(raw)
     const { meta, collections } = splitSnapshot(snapshot, toSchemaConfig(config))
