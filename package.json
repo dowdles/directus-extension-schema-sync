@@ -1,7 +1,7 @@
 {
   "name": "directus-extension-schema-split",
   "description": "Export and import Directus schema snapshots split by collection",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "icon": "sync",
   "keywords": ["directus", "directus-extension", "directus-extension-endpoint"],
   "license": "MIT",
