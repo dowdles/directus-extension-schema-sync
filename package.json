@@ -13,7 +13,7 @@
     "type": "endpoint",
     "path": "dist/index.js",
     "source": "src/endpoint/index.ts",
-    "host": "^11.0.0"
+    "host": ">=11.0.0"
   },
   "bin": {
     "schema-sync": "./dist/cli.js"

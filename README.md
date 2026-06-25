@@ -1,6 +1,12 @@
 # directus-extension-schema-split
 
-Export and import Directus schema snapshots split by collection — one JSON file per collection instead of a single monolithic snapshot. Easier to review in version control.
+Export and import Directus schema snapshots split by collection — one JSON file per collection instead of a single monolithic snapshot. Makes schema changes reviewable in version control.
+
+Requires Directus `>=11.0.0`.
+
+## Why
+
+Directus schema snapshots are a single JSON blob covering all collections, fields, and relations. A single field change touches hundreds of lines. This extension splits that blob into one file per collection so each diff is scoped to the changed collection.
 
 ## Installation
 
@@ -10,9 +16,23 @@ pnpm add directus-extension-schema-split
 
 Restart Directus after installation.
 
+## File format
+
+After export, `SCHEMA_SYNC_OUTPUT_DIR` contains:
+
+```
+snapshots/split/
+  _meta.json        # { version, directus, vendor }
+  zbr_pages.json    # { collection, fields[], relations[] }
+  zbr_products.json
+  ...
+```
+
+Each collection file holds the collection definition, all its fields, and all relations where that collection is on the many-side.
+
 ## Endpoints
 
-The extension registers two HTTP endpoints. Both require an admin token.
+Both endpoints run inside Directus and require an admin token.
 
 ### Export
 
@@ -66,9 +86,8 @@ The package ships a `schema-sync` CLI with two modes:
 
 The mode is selected automatically: if no token is provided, direct mode is used.
 
-```sh
-schema-sync export [options]
-schema-sync import [options]
+```
+schema-sync export|import [options]
 
 Options:
   --url <url>              Directus URL (HTTP mode only)
@@ -98,12 +117,40 @@ schema-sync export --url https://directus.example.com --token <admin-token>
 schema-sync import --url https://directus.example.com --token <admin-token>
 ```
 
-Example with a `.env` file:
+With a `.env` file:
 
 ```sh
 schema-sync export --env-file .env
 schema-sync import --env-file .env
 ```
+
+## Contributing
+
+### Setup
+
+```sh
+pnpm install
+pnpm test    # run all tests
+pnpm build   # build both targets (extension + CLI)
+```
+
+Run a single test file:
+
+```sh
+pnpm vitest run tests/export.test.ts
+```
+
+### Pull requests
+
+External contributors: fork the repo and open a PR against `main`.  
+Both `pnpm test` and `pnpm build` must pass.
+
+### Release process
+
+1. Bump the version in `package.json` and commit: `chore: bump version to x.y.z`
+2. Tag and push: `git tag vx.y.z && git push origin vx.y.z`
+
+The publish workflow triggers on the tag, syncs `package.json` to the tag version, and publishes to npm automatically.
 
 ## License
 
