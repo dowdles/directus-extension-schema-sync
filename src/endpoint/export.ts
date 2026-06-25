@@ -5,7 +5,7 @@ export function splitSnapshot(
   snapshot: DirectusSnapshot,
   config: SchemaConfig,
 ): { meta: SnapshotMeta; collections: Map<string, CollectionSnapshot> } {
-  const { version, directus, vendor, collections, fields, relations } = snapshot
+  const { version, directus, vendor, collections, fields, systemFields, relations } = snapshot
 
   const result = new Map<string, CollectionSnapshot>()
 
@@ -19,5 +19,8 @@ export function splitSnapshot(
     })
   }
 
-  return { meta: { version, directus, vendor }, collections: result }
+  const meta: SnapshotMeta = { version, directus, vendor }
+  if (systemFields !== undefined) meta.systemFields = systemFields
+
+  return { meta, collections: result }
 }

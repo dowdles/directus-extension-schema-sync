@@ -4,7 +4,7 @@ export function mergeSnapshots(
   meta: SnapshotMeta,
   collections: CollectionSnapshot[],
 ): DirectusSnapshot {
-  return {
+  const snapshot: DirectusSnapshot = {
     version: meta.version,
     directus: meta.directus,
     vendor: meta.vendor,
@@ -12,4 +12,6 @@ export function mergeSnapshots(
     fields: collections.flatMap((c) => c.fields),
     relations: collections.flatMap((c) => c.relations),
   }
+  if (meta.systemFields !== undefined) snapshot.systemFields = meta.systemFields
+  return snapshot
 }

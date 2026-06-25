@@ -16,6 +16,7 @@ export interface SnapshotMeta {
   version: number
   directus: string
   vendor: string
+  systemFields?: Record<string, unknown>[]
 }
 
 export interface DirectusSnapshot {
@@ -24,5 +25,6 @@ export interface DirectusSnapshot {
   vendor: string
   collections: Record<string, unknown>[]
   fields: Record<string, unknown>[]
+  systemFields?: Record<string, unknown>[]
   relations: Record<string, unknown>[]
 }
